@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/hello")
+@WebServlet("/hello") //경로
 public class Ex02_servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     public Ex02_servlet() {

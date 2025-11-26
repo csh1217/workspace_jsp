@@ -12,4 +12,19 @@
 		<input type="button" value="전송" onclick="send(this.form);">
 	</form>
 </body>
+<script type="text/javascript">
+	function  send(f) {
+		// 검색 내용이 없으면 "검색 내용을 입력하세요" 출력
+		// 내용이 있으면 해당 서블릿으로 submit
+		// * action 속성 추가
+		
+		if(f.query.value == ''){
+			alert("검색 내용을 입력해주세요")
+			return;
+		}
+		f.action = 'Ex04_request';
+		f.submit();
+		
+	}
+</script>
 </html>

@@ -7,28 +7,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/Ex04_request")
-public class Ex04_request extends HttpServlet {
+@WebServlet("/pagemove")
+public class Ex07_servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-    public Ex04_request() {
+    public Ex07_servlet() {
         super();
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=UTF-8");
 		
-		String query = request.getParameter("query");
-		String name = request.getParameter("name");
-		String age = request.getParameter("age");
+		String id = request.getParameter("id");
+		String pw = request.getParameter("pw");
+		System.out.println("id : " + id);
+		System.out.println("pw : " + pw);
 		
-		System.out.println("전달된 값은 " + query + "입니다.");
-		System.out.println("전달된 이름은 " + name + "입니다.");
-		System.out.println("전달된 나이는 " + age + "입니다.");
-		
+		request.getRequestDispatcher("Ex07_output.jsp").forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
-
 }
