@@ -1,4 +1,4 @@
-<%@page import="java.net.URLDecoder"%>
+<%@page import="java.net.URLEncoder"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -22,15 +22,11 @@
 	 if(cookieBox != null && cookieBox.length > 0){
 			for(int i=0; i<cookieBox.length;i++){
 				if(cookieBox[i].getName().equals("name")){
-					out.print("쿠키 이름 : " + cookieBox[i].getName() + "<br>");
-					out.print("쿠키 값 : " +
-					URLDecoder.decode("마이클 조던","utf-8") + "<br>");
-					cookieBox[i].setMaxAge(60 * 60 * 24 *15);
-					out.print("쿠키 값을 변경하였습니다");
-				}else{
-					out.print("쿠키 이름 : " + cookieBox[i].getName() + "<br>");
-					out.print("쿠키 값 : " +
-					URLDecoder.decode(cookieBox[i].getValue(),"utf-8") + "<br>");
+					cookieBox[i].setValue(URLEncoder.encode("마이클 조던", "utf-8"));
+					cookieBox[i].setMaxAge(60 * 60 * 24 * 15);
+					response.addCookie(cookieBox[i]);
+					out.print("쿠키 값을 변경하였습니다.");
+					break;
 				}
 			}
 		}else{
