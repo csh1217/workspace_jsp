@@ -10,7 +10,7 @@
 		 if(cookieBox != null && cookieBox.length > 0){
 				for(int i=0; i<cookieBox.length;i++){
 					if(cookieBox[i].getName().equals("save_id")){
-						cookieBox[i].setMaxAge(0);
+						cookieBox[i].setMaxAge(0); // 삭제
 						response.addCookie(cookieBox[i]);
 						break;
 					}

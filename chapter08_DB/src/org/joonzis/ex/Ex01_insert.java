@@ -2,7 +2,6 @@ package org.joonzis.ex;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-
 import org.joonzis.db.DBConnection;
 
 public class Ex01_insert {
