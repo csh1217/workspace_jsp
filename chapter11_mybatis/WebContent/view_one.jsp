@@ -21,7 +21,8 @@
 
 </head>
 <body>
-	<h1>${vo2.id}의 전체 데이터</h1>
+	<jsp:include page="index.jsp"/>
+	<h1>${vo.id}의 전체 데이터</h1>
 	<table>
 		<thead>
 			<tr>
