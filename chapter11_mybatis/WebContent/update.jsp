@@ -33,8 +33,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<jsp:include page="index.jsp"/>
-		<br> <hr> <br>
 	<c:choose>
 		<c:when test="${result > 0}">
 			<script type="text/javascript">

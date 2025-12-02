@@ -113,13 +113,14 @@ public class MemberDAO {
 	}
 	
 	// 데이터 삭제 메소드 - remove
-	public int remove(String id) {
+	public int remove(String id, String pw) {
 		int result = 0;
 		try {
 			conn = ds.getConnection(); //DB 연결
-			sql = "delete from member where id=?";//sql문 작성
+			sql = "delete from member where id=? and pw=?";//sql문 작성
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, id);
+			ps.setString(2, pw);
 
 			result = ps.executeUpdate();
 			if(result>0) {
@@ -177,13 +178,14 @@ public class MemberDAO {
 	}
 	
 	// 수정할 유저 정보 가져오는 메소드 - getUpdateView
-	public MemberVO getUpdateView(String id) {
+	public MemberVO getUpdateView(String id, String pw) {
 		MemberVO table = null;
 		try {
 			conn = ds.getConnection(); //DB 연결
-			sql = "select * from member where id=?";//sql문 작성
+			sql = "select * from member where id=? and pw=?";//sql문 작성
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, id);
+			ps.setString(2, pw);
 			rs = ps.executeQuery();
 			
 			if(rs.next()) {
@@ -215,14 +217,13 @@ public class MemberDAO {
 		int result = 0;
 		try {
 			conn = ds.getConnection(); //DB 연결
-			sql = "update member set id=?, pw=?, name=?, age=?, addr=? where id = ?";//sql문 작성
+			sql = "update member set, pw=?, name=?, age=?, addr=? where id = ?";//sql문 작성
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, vo.getId());
-			ps.setString(2, vo.getPw());
-			ps.setString(3, vo.getName());
-			ps.setInt(4, vo.getAge());
-			ps.setString(5, vo.getAddr());
-			ps.setString(6, vo.getId());
+			ps.setString(1, vo.getPw());
+			ps.setString(2, vo.getName());
+			ps.setInt(3, vo.getAge());
+			ps.setString(4, vo.getAddr());
+			ps.setString(5, vo.getId());
 			result = ps.executeUpdate();
 			if(result>0) {
 				conn.commit();

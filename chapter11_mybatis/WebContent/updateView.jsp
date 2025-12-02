@@ -5,22 +5,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	request.setCharacterEncoding("utf-8");
+	// Java -> DAO
 	String id = request.getParameter("id");
 	String pw = request.getParameter("pw");
 	
-	// jsp->dao
-	MemberDAO dao = MemberDAO.getInstance();
-	MemberVO table = dao.getUserInfoById(id);//비밀번호 비교를 위해
-	pageContext.setAttribute("table", table);
+	MemberVO vo = new MemberVO();
+	vo.setId(id);
+	vo.setPw(pw);
 	
-	int result = 0;
-	if(table != null){
-		if(pw.equals(table.getPw())){
-			result = 1;
-		}
-	}
-	pageContext.setAttribute("result", result);
+	MemberDAO dao = MemberDAO.getInstance();
+	vo = dao.getUpdateView(vo);
+	pageContext.setAttribute("vo", vo);
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,20 +31,14 @@
 	<jsp:include page="index.jsp"/>
 		<br> <hr> <br>
 	<c:choose>
-		<c:when test="${empty table}">
-			<script type="text/javascript">
-				alert("존재하지 않는 아이디입니다");
-				history.back();
-			</script>
-		</c:when>
-		<c:when test="${result==0}">
-			<script type="text/javascript">
-				alert("!비밀번호 입력 오류!");
-				history.back();
+		<c:when test="${empty vo}">
+		<script type="text/javascript">
+				alert("!정보 입력 오류!");
+				location.href = 'view_all.jsp';
 			</script>
 		</c:when>
 		<c:otherwise>
-			<h1>${table.id}의 회원정보 변경</h1>
+		<h1>${vo2.id}의 회원정보 변경</h1>
 			<form method="post">
 				<table>
 					<thead>
@@ -64,20 +55,22 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td>${table.idx}</td>
-							<td><input type="hidden" name="id" value="${table.id}"></td>
-							<td><input type="password" name="pw" value="${table.pw}"></td>
-							<td><input type="text" name="name" value="${table.name}"></td>
-							<td><input type="number" name="age" value="${table.age}"></td>
-							<td><input type="text" name="addr" value="${table.addr}"></td>
-							<td>${table.reg_date}</td>
-							<td><input type="button" value="수정" onclick="update(this.form)"></td>
+							<td>${vo.idx}</td>
+							<td><input type="hidden" name="id" value="${vo.id}"></td>
+							<td><input type="password" name="pw" value="${vo.pw}"></td>
+							<td><input type="text" name="name" value="${vo.name}"></td>
+							<td><input type="number" name="age" value="${vo.age}"></td>
+							<td><input type="text" name="addr" value="${vo.addr}"></td>
+							<td>${vo.reg_date}</td>
+							<td><input type="button" value="수정"
+								onclick="update(this.form)"></td>
 						</tr>
 					</tbody>
 				</table>
 			</form>
 		</c:otherwise>
 	</c:choose>
+
 </body>
 <script type="text/javascript">
 

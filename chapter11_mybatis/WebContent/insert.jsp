@@ -12,7 +12,6 @@
 	int age = Integer.parseInt(request.getParameter("age"));
 	String addr = request.getParameter("addr");
 	
-	
 	MemberVO vo = new MemberVO(); //parameter들을 하나로 뭉쳐 DAO로 전달하기 위한 객체 생성
 	vo.setId(id);
 	vo.setPw(pw);
@@ -22,7 +21,7 @@
 	
 	// dao의 메소드한테 vo객체를 전달
 	MemberDAO dao = MemberDAO.getInstance();
-	int result = dao.update(vo);
+	int result = dao.insert(vo);
 	pageContext.setAttribute("result", result);
 	
 %>
@@ -33,21 +32,21 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<jsp:include page="index.jsp"/>
-		<br> <hr> <br>
 	<c:choose>
 		<c:when test="${result > 0}">
 			<script type="text/javascript">
-				alert("!데이터 변경 성공!");
+				alert("데이터 삽입 성공");
 				location.href='view_all.jsp';
 			</script>
 		</c:when>
 		<c:otherwise>
 			<script type="text/javascript">
-				alert("!데이터 변경 실패!");
-				history.back();
+				alert("데이터 삽입 실패");
+				location.href='view_all.jsp';
 			</script>
 		</c:otherwise>
 	</c:choose>
 </body>
+
+
 </html>

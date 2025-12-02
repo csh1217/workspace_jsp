@@ -1,0 +1,36 @@
+@charset "UTF-8";
+	h1{
+		text-align: center;
+	}
+
+	table {
+		margin: 0 auto;
+		border:  1px solid lightseagreen;
+	}
+	thead {
+		background-color: lightseagreen;
+		color: white;
+	}
+	tfoot{
+		background-color: lightseagreen;
+	}
+	td{
+		text-align: center;
+		padding: 3px;
+	}
+	th{
+		height: 30px;
+		padding: 5px;
+	}
+	input[type=button], input[type=reset]{
+		background-color: lightseagreen;
+		border: 1px solid white;
+		padding: 5px;
+		color: white;
+	}
+	input[type=button]:hover,input[type=reset]:hover  {
+		background-color: white;
+		color: lightseagreen;
+		font-weight: bold;
+		cursor: pointer;
+	}
