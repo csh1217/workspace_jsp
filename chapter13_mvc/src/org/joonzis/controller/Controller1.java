@@ -20,7 +20,7 @@ public class Controller1 extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=ytf-8");
 		
-		Today today = new Today();
+		Today today = new Today(); // Today 객체 생성
 		String path = today.process(request);
 		
 		request.getRequestDispatcher(path).forward(request, response);

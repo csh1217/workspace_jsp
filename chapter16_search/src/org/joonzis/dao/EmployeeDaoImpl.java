@@ -1,6 +1,8 @@
 package org.joonzis.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.joonzis.mybatis.config.DBService;
@@ -27,6 +29,16 @@ public class EmployeeDaoImpl implements EmployeeDao{
 	@Override
 	public List<EmployeeVO> getAll() {
 		return getSqlSession().selectList("select_all");
+	}
+	
+	@Override
+	public List<EmployeeVO> getDeptId(String deptId){
+		return getSqlSession().selectList("select_deptId", deptId);
+	}
+	
+	@Override
+	public List<EmployeeVO> getDynamic(Map<String, Object> info){
+		return getSqlSession().selectList("select_dynamic", info);
 	}
 	
 	

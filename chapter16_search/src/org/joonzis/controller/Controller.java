@@ -1,7 +1,9 @@
 package org.joonzis.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -42,19 +44,36 @@ public class Controller extends HttpServlet {
 		case "allList" :
 			list = service.getAll();
 			request.setAttribute("list", list);
-			// 전체 데이터 가져오기
-			// 가져온 데이터 request에 담기
-			// 응답 페이지 경로 저장
 			path = "allList.jsp";
 			break;
-		// 단순 화면 이동 ---------
+		case "deptList":
+			String deptId = request.getParameter("department_id");
+			
+			list = service.getDeptId(deptId);
+			request.setAttribute("list", list);
+			request.setAttribute("deptId", deptId);
+			path = "deptList.jsp";
+			break;
 		case "inputDept" :
-			path = "inputDept.jsp";
+			path = "input_dept.jsp";
+			break;
+		case "dynamicList":
+			Map<String, Object> info = new HashMap<>();
+			int key = Integer.parseInt(request.getParameter("key"));
+			String value = request.getParameter("value");
+			info.put("key", key);
+			info.put("value", value);
+			
+			list = service.getDynamic(info);
+			request.setAttribute("list", list);
+			request.setAttribute("key", key);
+			request.setAttribute("value", value);
+			path = "dynamicList.jsp";
 			break;
 		case "inputDynamic" :
-			path = "inputDynamic.jsp";
+			path = "input_dynamic.jsp";
 			break;
-		}
+		
 		
 		if(isForward) {
 			request.getRequestDispatcher(path).forward(request, response);

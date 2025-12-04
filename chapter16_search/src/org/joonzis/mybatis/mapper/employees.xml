@@ -8,6 +8,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="select_all" resultType="org.joonzis.vo.EmployeeVO">
 		select * from employees order by employee_id
 	</select>
+	
+	<select id="select_deptId" parameterType="String" resultType="org.joonzis.vo.EmployeeVO">
+		select * from employees where department_id=#{department_id} order by employee_id
+	</select>
+	
+	<select id = "select_dynamic" parameterType="map" resultType="org.joonzis.vo.EmployeeVO">
+		select * from employees where
+		<choose>
+			<when test="key == 1">employee_id=#{value}</when>
+			<when test="key == 2">first_name=#{value} order by employee_id</when>
+			<when test="key == 3">department_id=#{value} order by employee_id</when>
+		</choose>
+	</select>
 </mapper>
 
 

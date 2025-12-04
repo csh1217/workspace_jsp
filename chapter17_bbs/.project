@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>chapter12_FileUpDown</name>
+	<name>chapter17_bbs</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -30,7 +30,7 @@
 	</natures>
 	<filteredResources>
 		<filter>
-			<id>1764665110275</id>
+			<id>1764745924138</id>
 			<name></name>
 			<type>30</type>
 			<matcher>
