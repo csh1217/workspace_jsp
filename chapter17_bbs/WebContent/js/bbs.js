@@ -27,6 +27,16 @@ function insert(f){
 
 // 게시글 수정 페이지 이동 함수
 function updatePage(){
+    location.href = 'BBSController?cmd=updatePage';
+}
+// 게시글 수정 함수
+function update(f){  
+    if(!f.title.value||!f.content.value){
+        alert('제목과 내용을 모두 입력하세요');
+    }
+
+    f.action = 'BBSController';
+    f.submit();
 
 }
 

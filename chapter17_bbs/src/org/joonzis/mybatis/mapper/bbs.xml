@@ -30,6 +30,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from bbs_t where b_idx=#{b_idx}
 	</delete>
 	
+	<update id="update_bbs" parameterType="org.joonzis.vo.BVO">
+		update bbs_t set title=#{title}, filename=#{filename}, content=#{content}
+		where b_idx=#{b_idx}
+	</update>
+	
+	<update id="update_hit" parameterType="org.joonzis.vo.BVO">
+		update bbs_t set hit = #{hit} where b_idx=#{b_idx}
+	</update>
+	
 </mapper>
 
 

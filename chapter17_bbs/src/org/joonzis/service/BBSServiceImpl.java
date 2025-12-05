@@ -29,6 +29,17 @@ public class BBSServiceImpl implements BBSService{
 	public int removeBBS(int b_idx) {
 		return bdao.removeBBS(b_idx);
 	}
+
+	@Override
+	public int updateBBS(BVO bvo) {
+		return bdao.updateBBS(bvo);
+	}
+
+	@Override
+	public void updateHit(BVO bvo) {
+		bdao.updateHit(bvo);
+	}
+	
 	
 
 	
