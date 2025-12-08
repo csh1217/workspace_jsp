@@ -12,11 +12,11 @@ table {
 td,th {
 	border : 1px solid #3fdf84;
 	padding: 10px;	
+	text-align: center;
 }
 
 th {
 	width: 130px;
-	text-align: center;
 	background-color: #1dbe63;
 	color: white;
 }

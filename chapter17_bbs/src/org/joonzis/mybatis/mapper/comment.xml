@@ -9,13 +9,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into comment_t values(
 			COMMENT_SEQ.nextval,
 			#{writer},
-			 #{content},
-			 #{pw},
-			 #{ip},
-			 sysdate,
-			 #{b_idx}
+			#{content},
+			#{pw},
+			#{ip},
+			sysdate,
+			#{b_idx}
 			 )
 	</insert>
+	
+	<select id="select_comment" parameterType="int" resultType="org.joonzis.vo.CVO">
+		select * from comment_t where b_idx = #{value}
+	</select>
+	
+	<delete id="remove_comment" parameterType="int">
+		delete from comment_t where c_idx = #{value}
+	</delete>
 	
 </mapper>
 

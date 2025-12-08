@@ -3,6 +3,7 @@ package org.joonzis.dao;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
+import org.joonzis.model.Criteria;
 import org.joonzis.mybatis.config.DBService;
 import org.joonzis.vo.BVO;
 
@@ -24,10 +25,14 @@ public class BDaoImpl implements BDao{
 		return sqlsession;
 	}
 	
-	@Override
-	public List<BVO> getList() {
-		return getSqlSession().selectList("bbs_select_all");
+@Override
+	public List<BVO> getListWithPaging(Criteria cri) {
+		return getSqlSession().selectList("bbs_select_all_with_paging", cri);
 	}
+	//	@Override
+//	public List<BVO> getList() {
+//		return getSqlSession().selectList("bbs_select_all");
+//	}
 	@Override
 	public int getInsertBBS(BVO bvo) {
 		int result = getSqlSession().insert("insert_bbs", bvo);

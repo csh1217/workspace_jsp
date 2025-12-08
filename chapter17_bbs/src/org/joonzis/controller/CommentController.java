@@ -63,6 +63,24 @@ public class CommentController extends HttpServlet {
 			
 			//insertComment(cvo)
 			//insert_comment
+			
+		case "commList":
+			int b_idx = Integer.parseInt(request.getParameter("b_idx"));
+			
+			// cservice.getCommList 호출
+			// cList 라는 참조 변수에 저장
+			List<CVO> cList = cservice.getCommList(b_idx);
+			
+			objectMapper = new ObjectMapper();
+			jsonString = objectMapper.writeValueAsString(cList);
+			
+			obj.put("cList", jsonString);
+			break;
+		
+		case "removeComment":
+			int c_idx = Integer.parseInt(request.getParameter("c_idx"));
+			cservice.removeComment(c_idx);
+			break;
 		}
 		out.print(obj);
 		

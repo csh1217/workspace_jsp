@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.joonzis.model.Criteria;
 import org.joonzis.model.FileDownload;
 import org.joonzis.service.BBSService;
 import org.joonzis.service.BBSServiceImpl;
@@ -58,16 +59,37 @@ public class BBSController extends HttpServlet {
 		int b_idx = 0;
 		String open = null; // 세션 정보 저장
 		
+		// 페이징을 위한 cri 파라미터 변수
+		String pageNum = "";//allList에서만 쓰이는 것이 아니기 때문에 전역변수로 선언
+		String amount = "";
+		int parsePageNum = 0;
+		int parseAmount = 0;
+		
 		switch (cmd) {
 		case "allList": // 게시글 전체 목록 보기
-			
 			// 세션 삭제(조회수)
 			open=(String)session.getAttribute("open");
 			if(open!=null) {
 				session.removeAttribute("open");
 			}
 			
-			list = bservice.getList();
+			pageNum = request.getParameter("pageNum");
+			amount = request.getParameter("amount");
+			
+			if(pageNum != null && amount != null) {
+				// 파라미터를 전달 받으면 적용
+				parsePageNum = Integer.parseInt(pageNum);
+				parseAmount = Integer.parseInt(amount);
+			}else {
+				// 파라미터를 전달 받지 못하면 기본 값으로 초기화
+				parsePageNum = 1;
+				parseAmount = 5;
+			}
+			Criteria cri = new Criteria(parsePageNum, parseAmount);
+			
+			//list = bservice.getList();
+			list = bservice.getListWithPaging(cri);
+			
 			request.setAttribute("list", list);
 			path = "bbs/allList.jsp";
 			break;
