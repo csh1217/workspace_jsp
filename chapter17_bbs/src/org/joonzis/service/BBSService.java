@@ -13,4 +13,5 @@ public interface BBSService {
 	public int removeBBS(int b_idx);
 	public int updateBBS(BVO bvo);
 	public void updateHit(BVO bvo);
+	public int getTotalRecordCount();
 }

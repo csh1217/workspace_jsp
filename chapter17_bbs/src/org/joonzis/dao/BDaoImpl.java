@@ -17,6 +17,8 @@ public class BDaoImpl implements BDao{
 		return instance;
 	}
 	
+	
+	
 	private static SqlSession sqlsession = null;
 	private synchronized static SqlSession getSqlSession() {
 		if(sqlsession == null) {
@@ -25,9 +27,16 @@ public class BDaoImpl implements BDao{
 		return sqlsession;
 	}
 	
-@Override
+	@Override
 	public List<BVO> getListWithPaging(Criteria cri) {
 		return getSqlSession().selectList("bbs_select_all_with_paging", cri);
+	}
+
+
+	@Override
+	public int getTotalRecordCount() {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectOne("total_count_of_bbs");
 	}
 	//	@Override
 //	public List<BVO> getList() {

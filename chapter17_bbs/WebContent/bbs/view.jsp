@@ -43,8 +43,8 @@
 					</tr>
 					<tr>
 						<td colspan="4" id="btn">
-							<input type="button" value="게시글 수정하기" onclick="updatePage()">&nbsp;&nbsp;
-							<input type="button" value="게시글 삭제하기" onclick="removeBBS(${bvo.b_idx})">&nbsp;&nbsp;
+							<input type="button" value="게시글 수정하기" onclick="updatePage('${pageNum}')">&nbsp;&nbsp;
+							<input type="button" value="게시글 삭제하기" onclick="removeBBS(${bvo.b_idx}, '${pageNum}')">&nbsp;&nbsp;
 							<input type="button" value="목록으로 이동" onclick="view_all()">
 							<input type="hidden" name="b_idx" value="${bvo.b_idx }">
 						</td>

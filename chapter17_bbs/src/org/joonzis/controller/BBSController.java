@@ -12,8 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.jasper.tagplugins.jstl.core.Out;
 import org.joonzis.model.Criteria;
 import org.joonzis.model.FileDownload;
+import org.joonzis.model.PageDTO;
 import org.joonzis.service.BBSService;
 import org.joonzis.service.BBSServiceImpl;
 import org.joonzis.vo.BVO;
@@ -90,7 +92,13 @@ public class BBSController extends HttpServlet {
 			//list = bservice.getList();
 			list = bservice.getListWithPaging(cri);
 			
+			// 전체 게시글 수 가져오기
+			int total = bservice.getTotalRecordCount();
+			PageDTO pdto = new PageDTO(cri, total); // PageDTO 객체 생성
+			// 게시글 및 페이징 객체 request 객체로 전달
 			request.setAttribute("list", list);
+			request.setAttribute("pageMaker", pdto);
+			
 			path = "bbs/allList.jsp";
 			break;
 			
@@ -128,6 +136,8 @@ public class BBSController extends HttpServlet {
 			b_idx = Integer.parseInt(request.getParameter("b_idx"));
 			bvo = bservice.getBBS(b_idx);
 			
+			pageNum = request.getParameter("pageNum");
+			request.setAttribute("pageNum", pageNum);
 			// 조회수 증가 로직
 			// 1. 상세 페이지에 접근 시 세션에 정보를 저장
 			// 2. 세션이 만료되기 전까지 조회수의 증가를 더 이상 하지 않는다(새로고침 등으로 조회 수 증가 방지)
@@ -147,14 +157,17 @@ public class BBSController extends HttpServlet {
 			// 게시글 삭제
 		case "remove":
 			b_idx = Integer.parseInt(request.getParameter("b_idx"));
-			
+			pageNum = request.getParameter("pageNum");
+			System.out.println(pageNum);
 			bservice.removeBBS(b_idx);
 			isForward = false;
-			path = "BBSController?cmd=allList";
+			path = "BBSController?cmd=allList&pageNum=" +pageNum +"&amount=5";
 			break;
 			
 			// 수정 페이지 이동
 		case "updatePage":
+			pageNum = request.getParameter("pageNum");
+			request.setAttribute("pageNum", pageNum);
 			path = "bbs/update_page.jsp";
 			break;
 			
@@ -167,6 +180,7 @@ public class BBSController extends HttpServlet {
 			
 			File newFile = mr.getFile("filename");
 			String oldFile = mr.getParameter("oldfile");
+			pageNum = mr.getParameter("pageNum");
 			
 			if(newFile!=null) {
 				// 새 첨부 파일 O
@@ -189,7 +203,7 @@ public class BBSController extends HttpServlet {
 			}
 			bservice.updateBBS(bvo);
 			isForward = false;
-			path = "BBSController?cmd=view&b_idx=" + mr.getParameter("b_idx");
+			path = "BBSController?cmd=allList&pageNum=" +pageNum +"&amount=5";
 			break;
 			
 		case "download":

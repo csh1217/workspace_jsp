@@ -76,6 +76,7 @@
 							<input type="button" value="목록으로 이동" onclick="view_all()">
 							<input type="hidden" name="b_idx" value="${bvo.b_idx }">
 							<input type="hidden" name="cmd" value="update">
+							<input type="hidden" name="pageNum" value="${pageNum}">
 						</td>
 					</tr>
 				</tbody>
