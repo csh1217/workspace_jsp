@@ -4,17 +4,17 @@ import java.sql.Date;
 
 public class MemberVO {
 	private int m_idx;
-	private String mId, mPw, mName, meMail;
+	private String mId, mPw, mName, mEmail;
 	private Date mRegDate;
 	public MemberVO() {
 	}
-	public MemberVO(int m_idx, String mId, String mPw, String mName, String meMail, Date mRegDate) {
+	public MemberVO(int m_idx, String mId, String mPw, String mName, String mEmail, Date mRegDate) {
 		super();
 		this.m_idx = m_idx;
 		this.mId = mId;
 		this.mPw = mPw;
 		this.mName = mName;
-		this.meMail = meMail;
+		this.mEmail = mEmail;
 		this.mRegDate = mRegDate;
 	}
 	public int getM_idx() {
@@ -41,11 +41,11 @@ public class MemberVO {
 	public void setmName(String mName) {
 		this.mName = mName;
 	}
-	public String getMeMail() {
-		return meMail;
+	public String getmEmail() {
+		return mEmail;
 	}
-	public void setMeMail(String meMail) {
-		this.meMail = meMail;
+	public void setmEmail(String mEmail) {
+		this.mEmail = mEmail;
 	}
 	public Date getmRegDate() {
 		return mRegDate;
